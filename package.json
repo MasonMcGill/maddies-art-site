@@ -1,5 +1,6 @@
 {
     "private": true,
+    "type": "module",
     "dependencies": {
         "@fontsource/caveat": "^4.5.7",
         "@fontsource/delius": "^4.5.8",
@@ -9,16 +10,23 @@
         "@fontsource/short-stack": "^4.5.9",
         "@fontsource/special-elite": "^4.5.7",
         "@fontsource/water-brush": "^4.5.0",
-        "cheerio": "^1.0.0-rc.10",
-        "fs-extra": "~10.1.0",
-        "install": "^0.13.0",
-        "live-server": "~1.2.2",
-        "npm": "^8.8.0",
-        "pretty": "^2.0.0",
-        "sharp": "^0.30.4"
+        "@rollup/plugin-node-resolve": "^13.3.0",
+        "@rollup/plugin-sucrase": "^4.0.3",
+        "del": "^6.0.0",
+        "fs-extra": "^10.1.0",
+        "gulp": "^4.0.2",
+        "lit-html": "^2.2.3",
+        "live-server": "^1.1.0",
+        "rollup": "^2.72.1"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.13",
+        "@types/gulp": "^4.0.9"
     },
     "scripts": {
-        "build": "node builder/main.js",
+        "build": "gulp build",
+        "watch": "gulp watch",
+        "clean": "gulp clean",
         "serve": "live-server site"
     }
 }
