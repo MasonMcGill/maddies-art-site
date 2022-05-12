@@ -1,112 +1,50 @@
-import { html, render } from 'lit-html';
+import { TemplateResult, html, render } from 'lit-html';
 
-render(rootView(location.hash), document.body);
+import aboutView from './aboutView';
+import collectionView from './collectionView';
+import collections from './collections';
+import contactView from './contactView';
+import homeView from './homeView';
+import paintingView from './paintingView';
 
-window.onhashchange = () => {
+const viewBuilders = new Map(getViewBuilders());
+
+function main() {
   render(rootView(location.hash), document.body);
-};
+  window.onhashchange = () => {
+    render(rootView(location.hash), document.body);
+  };
+}
 
 function rootView(path: string) {
-  const entries = [
-    {
-      name: '2022',
-      // linkPath: '2022-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2022/bts.jpg'
-    },
-    {
-      name: '2021',
-      // linkPath: '2021-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2021/coney-island.jpg'
-    },
-    {
-      name: '2020',
-      // linkPath: '2020-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2020/in-your-head.jpg'
-    },
-    {
-      name: '2019',
-      // linkPath: '2019-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2019/wet-tiger.jpg'
-    },
-    {
-      name: '2018',
-      // linkPath: '2018-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2018/trickle-down.jpg'
-    },
-    {
-      name: '2017',
-      // linkPath: '2017-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2017/city-man.jpg'
-    },
-    {
-      name: '2016',
-      // linkPath: '2016-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2016/political.jpg'
-    },
-    {
-      name: '2015',
-      // linkPath: '2015-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2015/big-lady.jpg'
-    },
-    {
-      name: '2014',
-      // linkPath: '2014-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2014/lady-and-the-tiger.jpg'
-    },
-    {
-      name: '2013',
-      // linkPath: '2013-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2013/rabbits.jpg'
-    },
-    {
-      name: '2012',
-      // linkPath: '2012-paintings.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2012/extinction-dream-2.jpg'
-    },
-    {
-      name: 'About',
-      // linkPath: 'about.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2017/lichtenstein.jpg'
-    },
-    {
-      name: 'Contact',
-      // linkPath: 'contact.html',
-      linkPath: 'construction-notice.html',
-      imagePath: 'images/paintings-2021/heart-disruption.jpg'
-    }
-  ];
-
   return html`
     <header>
       <a href="index.html">
-          —&nbsp; Madeline Weste &nbsp;—
+        —&nbsp; Madeline Weste &nbsp;—
       </a>
     </header>
     <main>
-      <div class="card-container">
-        ${
-          entries.map(({ name, linkPath, imagePath }) => html`
-            <a href="${linkPath}">
-              <div class="card">
-                <img src="${imagePath}">
-                <div class="label">${name}</div>
-              </div>
-            </a>
-          `)
-        }
-      </div>
+      ${ viewBuilders.has(path)
+        ? viewBuilders.get(path)
+        : viewBuilders.get('') }
     </main>
   `;
 }
+
+function* getViewBuilders(): Iterable<[string, TemplateResult]> {
+  yield ['', homeView()];
+  yield ['#about', aboutView()];
+  yield ['#contact', contactView()];
+
+  for (const c of collections) {
+    yield [`#collections/${c.name}`, collectionView(c)];
+  }
+
+  for (const c of collections) {
+    for (const p of c.paintingNames) {
+      yield [`#paintings/${c.name}/${p}`, paintingView(c.name, p)];
+    }
+  }
+}
+
+main();
