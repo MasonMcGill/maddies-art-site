@@ -1,50 +1,27 @@
-import { TemplateResult, html, render } from 'lit-html';
+import { BlankView, View, getViewsByName } from "./views";
 
-import aboutView from './aboutView';
-import collectionView from './collectionView';
-import collections from './collections';
-import contactView from './contactView';
-import homeView from './homeView';
-import paintingView from './paintingView';
+const views = new Map(getViewsByName());
+let presentedView: View = new BlankView();
 
-const viewBuilders = new Map(getViewBuilders());
+document.body.innerHTML = `
+  <header>
+    <a href="/#/">
+      —&nbsp; Madeline Weste &nbsp;—
+    </a>
+  </header>
+  <main></main>
+`;
 
-function main() {
-  render(rootView(location.hash), document.body);
-  window.onhashchange = () => {
-    render(rootView(location.hash), document.body);
-  };
+function updatePresentedView() {
+  const container = document.querySelector("main");
+  const view = views.get(location.hash) || views.get("");
+  view.render(container, presentedView);
+  presentedView = view;
 }
 
-function rootView(path: string) {
-  return html`
-    <header>
-      <a href="index.html">
-        —&nbsp; Madeline Weste &nbsp;—
-      </a>
-    </header>
-    <main>
-      ${ viewBuilders.has(path)
-        ? viewBuilders.get(path)
-        : viewBuilders.get('') }
-    </main>
-  `;
-}
+window.onhashchange = (event: HashChangeEvent) => {
+  updatePresentedView();
+  event.preventDefault();
+};
 
-function* getViewBuilders(): Iterable<[string, TemplateResult]> {
-  yield ['', homeView()];
-  yield ['#about', aboutView()];
-  yield ['#contact', contactView()];
-
-  for (const c of collections) {
-    yield [`#collections/${c.name}`, collectionView(c)];
-  }
-
-  for (const c of collections) {
-    for (const p of c.paintingNames) {
-      yield [`#paintings/${c.name}/${p}`, paintingView(c.name, p)];
-    }
-  }
-}
-
-main();
+updatePresentedView();
