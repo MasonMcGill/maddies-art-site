@@ -1,5 +1,12 @@
 import { collections } from "./collections";
 
+declare const imageSizes: {
+  readonly [path: string]: {
+    readonly width: string;
+    readonly height: string;
+  };
+};
+
 export interface View {
   render(container: HTMLElement, previousView: View): void;
 }
@@ -13,9 +20,13 @@ export class HomeView implements View {
     const imagePath = (cName: string, pName: string) => {
       return `images-small-and-square/paintings-${cName}/${pName}.jpg`;
     };
+    const dimensions = (cName: string, pName: string) => {
+      const { width, height } = imageSizes[imagePath(cName, pName)];
+      return { style: `min-width:${width}px;min-height:${height}px` };
+    };
     const collectionCards = collections.map(({ name, paintingNames }) =>
       $("a", { href: `/#/collections/${name}` }, [
-        $("div", { class: "card" }, [
+        $("div", { class: "card", ...dimensions(name, paintingNames[0]) }, [
           $("img", { src: imagePath(name, paintingNames[0]) }),
           $("div", { class: "label" }, [name]),
         ]),
@@ -23,13 +34,13 @@ export class HomeView implements View {
     );
     const infoCards = [
       $("a", { href: `/#/about` }, [
-        $("div", { class: "card" }, [
+        $("div", { class: "card", ...dimensions("2017", "lichtenstein") }, [
           $("img", { src: imagePath("2017", "lichtenstein") }),
           $("div", { class: "label" }, ["About"]),
         ]),
       ]),
       $("a", { href: `/#/contact` }, [
-        $("div", { class: "card" }, [
+        $("div", { class: "card", ...dimensions("2021", "heart-disruption") }, [
           $("img", { src: imagePath("2021", "heart-disruption") }),
           $("div", { class: "label" }, ["Contact"]),
         ]),
@@ -76,10 +87,17 @@ export class CollectionView implements View {
   }
 
   render(container: HTMLElement, previousView: View): void {
+    const imagePath = (cName: string, pName: string) => {
+      return `images-small/paintings-${cName}/${pName}.jpg`;
+    };
+    const dimensions = (cName: string, pName: string) => {
+      const { width, height } = imageSizes[imagePath(cName, pName)];
+      return { style: `width:${width}px;height:${height}px` };
+    };
     const cards = this.paintingNames.map((pName) =>
       $("a", { href: `/#/paintings/${this.name}/${pName}` }, [
-        $("div", { class: "card" }, [
-          $("img", { src: `images-small/paintings-${this.name}/${pName}.jpg` }),
+        $("div", { class: "card", ...dimensions(this.name, pName) }, [
+          $("img", { src: imagePath(this.name, pName) }),
         ]),
       ])
     );
