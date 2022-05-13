@@ -10,30 +10,31 @@ export class BlankView {
 
 export class HomeView implements View {
   render(container: HTMLElement, previousView: View): void {
+    const imagePath = (cName: string, pName: string) => {
+      return `images-small-and-square/paintings-${cName}/${pName}.jpg`;
+    };
     const collectionCards = collections.map(({ name, paintingNames }) =>
       $("a", { href: `/#/collections/${name}` }, [
         $("div", { class: "card" }, [
-          $("img", { src: `images/paintings-${name}/${paintingNames[0]}.jpg` }),
+          $("img", { src: imagePath(name, paintingNames[0]) }),
           $("div", { class: "label" }, [name]),
         ]),
       ])
     );
-
     const infoCards = [
       $("a", { href: `/#/about` }, [
         $("div", { class: "card" }, [
-          $("img", { src: "images/paintings-2017/lichtenstein.jpg" }),
+          $("img", { src: imagePath("2017", "lichtenstein") }),
           $("div", { class: "label" }, ["About"]),
         ]),
       ]),
       $("a", { href: `/#/contact` }, [
         $("div", { class: "card" }, [
-          $("img", { src: "images/paintings-2021/heart-disruption.jpg" }),
+          $("img", { src: imagePath("2021", "heart-disruption") }),
           $("div", { class: "label" }, ["Contact"]),
         ]),
       ]),
     ];
-
     container.replaceChildren(
       $("div", { class: "card-container" }, [...collectionCards, ...infoCards])
     );
@@ -78,7 +79,7 @@ export class CollectionView implements View {
     const cards = this.paintingNames.map((pName) =>
       $("a", { href: `/#/paintings/${this.name}/${pName}` }, [
         $("div", { class: "card" }, [
-          $("img", { src: `images/paintings-${this.name}/${pName}.jpg` }),
+          $("img", { src: `images-small/paintings-${this.name}/${pName}.jpg` }),
         ]),
       ])
     );
