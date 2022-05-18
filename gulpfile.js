@@ -2,6 +2,7 @@ import del from "del";
 import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
+import injectProcessEnv from "rollup-plugin-inject-process-env";
 import { rollup } from "rollup";
 import resolve from "@rollup/plugin-node-resolve";
 import sharp from "sharp";
@@ -9,8 +10,9 @@ import sucrase from "@rollup/plugin-sucrase";
 
 async function compileUi() {
   const rollupPlugins = [
-    resolve({ extensions: [".js", ".ts"] }),
     sucrase({ exclude: ["node_modules/**"], transforms: ["typescript"] }),
+    resolve({ extensions: [".js", ".ts"] }),
+    injectProcessEnv({ NODE_ENV: "production" }),
   ];
   const bundle = await rollup({
     input: "source/ui/main.ts",

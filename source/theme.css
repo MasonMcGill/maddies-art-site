@@ -1,35 +1,3 @@
-body {
-  margin: 0;
-  background-color: black;
-  color: white;
-}
-
-header {
-  position: fixed;
-  width: 100%;
-  padding-top: 3px;
-  padding-bottom: 0px;
-
-  background-color: black;
-  box-shadow: 0px 0px 15px 0px black;
-
-  text-align: center;
-  font-family: 'Water Brush';
-  font-size: 28px;
-  z-index: 1;
-}
-
-header a {
-  color: white;
-  text-decoration: none;
-}
-
-main {
-  padding-top: 48px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
 .card-container {
   display: flex;
   flex-direction: row;
@@ -75,17 +43,4 @@ main {
   font-family: 'Kalam';
   font-size: 36px;
   color: black;
-}
-
-.icon {
-  margin-bottom: -2.5px;
-  height: 15px;
-  filter: invert(1);
-}
-
-.construction-notice {
-  color: white;
-  text-align: center;
-  font-family: 'Kalam';
-  font-size: 24px;
 }
