@@ -34,11 +34,16 @@ async function makeThumbnails() {
   glob.sync("source/images/**/*.jpg").forEach(async (src) => {
     await fs.outputFile(
       src.replace(/^source\/images/, "site/images-small"),
-      await sharp(src).resize(null, 200).jpeg().toBuffer()
+      await sharp(src).resize(240, 240, { fit: "outside" }).jpeg().toBuffer()
     );
+  });
+}
+
+async function makeFullSizeImages() {
+  glob.sync("source/images/**/*.jpg").forEach(async (src) => {
     await fs.outputFile(
-      src.replace(/^source\/images/, "site/images-small-and-square"),
-      await sharp(src).resize(200, 200).jpeg().toBuffer()
+      src.replace(/^source\/images/, "site/images"),
+      await sharp(src).resize(1200, 1200, { fit: "outside" }).jpeg().toBuffer()
     );
   });
 }
@@ -64,9 +69,8 @@ async function copyAsset(name) {
 
 export async function build() {
   await fs.copy("source/index.html", "site/index.html");
-  await fs.copy("source/theme.css", "site/theme.css");
-  await fs.copy("source/images", "site/images");
   await makeThumbnails();
+  await makeFullSizeImages();
   await makeImageSizeFile();
   await copyFonts();
   await compileUi();
@@ -75,10 +79,9 @@ export async function build() {
 export async function watch() {
   await build();
   gulp.watch("source/index.html", () => copyAsset("index.html"));
-  gulp.watch("source/theme.css", () => copyAsset("theme.css"));
   gulp.watch("source/images/**", async () => {
-    await copyAsset("images");
     await makeThumbnails();
+    await makeFullSizeImages();
     await makeImageSizeFile();
   });
   gulp.watch("node_modules/@fontsource", copyFonts);

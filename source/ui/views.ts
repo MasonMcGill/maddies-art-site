@@ -1,95 +1,302 @@
-import { collections } from "./collections";
+import { css } from "@emotion/css";
+
+import { aboutImage, collections, contactImage } from "./constants";
+import { VirtualElement, a, br, div, img } from "./elements";
 
 declare const imageSizes: {
   readonly [path: string]: {
-    readonly width: string;
-    readonly height: string;
+    readonly width: number;
+    readonly height: number;
   };
 };
 
-export async function showHomeView(container: HTMLElement): Promise<void> {
-  const imagePath = (cName: string, pName: string) => {
-    return `images-small-and-square/paintings-${cName}/${pName}.jpg`;
-  };
-  const dimensions = (cName: string, pName: string) => {
-    const { width, height } = imageSizes[imagePath(cName, pName)];
-    return { style: `min-width:${width}px;min-height:${height}px` };
-  };
-  const collectionCards = collections.map(({ name, paintingNames }) =>
-    $("a", { href: `/#/collections/${name}` }, [
-      $("div", { class: "card", ...dimensions(name, paintingNames[0]) }, [
-        $("img", { src: imagePath(name, paintingNames[0]) }),
-        $("div", { class: "label" }, [name]),
-      ]),
-    ])
-  );
-  const infoCards = [
-    $("a", { href: `/#/about` }, [
-      $("div", { class: "card", ...dimensions("2017", "lichtenstein") }, [
-        $("img", { src: imagePath("2017", "lichtenstein") }),
-        $("div", { class: "label" }, ["About"]),
-      ]),
-    ]),
-    $("a", { href: `/#/contact` }, [
-      $("div", { class: "card", ...dimensions("2021", "heart-disruption") }, [
-        $("img", { src: imagePath("2021", "heart-disruption") }),
-        $("div", { class: "label" }, ["Contact"]),
-      ]),
-    ]),
-  ];
-  container.replaceChildren(
-    $("div", { class: "card-container" }, [...collectionCards, ...infoCards])
-  );
+export function aboutView(): VirtualElement {
+  return div({
+    class: css`
+      width: min(100% - 15px, 600px);
+      margin: auto;
+      font-family: "Cutive Mono";
+      font-size: 17px;
+    `,
+    children: [
+      `Madeline Weste is a painter living in Los Angeles.
+      She is very good with computers. 🖌️\\🤖_🎨`,
+    ],
+  });
 }
 
-export async function showCollectionView(
-  container: HTMLElement,
-  cName: string
-): Promise<void> {
-  const imagePath = (pName: string) => {
-    return `images-small/paintings-${cName}/${pName}.jpg`;
-  };
-  const dimensions = (pName: string) => {
-    const { width, height } = imageSizes[imagePath(pName)];
-    return { style: `width:${width}px;height:${height}px` };
-  };
-  const collection = collections.find((c) => c.name === cName);
-  const cards = collection.paintingNames.map((pName) =>
-    $("a", { href: `/#/paintings/${cName}/${pName}` }, [
-      $("div", { class: "card", ...dimensions(pName) }, [
-        $("img", { src: imagePath(pName) }),
-      ]),
-    ])
-  );
-  container.replaceChildren($("div", { class: "card-container" }, cards));
+export function contactView(): VirtualElement {
+  const iconClass = css`
+    margin-bottom: -2.5px;
+    height: 15px;
+    filter: invert(1);
+  `;
+  const emailIcon = img({
+    class: iconClass,
+    src: "images/icons/email.svg",
+  });
+  const instagramIcon = img({
+    class: iconClass,
+    src: "images/icons/instagram.svg",
+  });
+  return div({
+    class: css`
+      width: min(100% - 15px, 600px);
+      margin: auto;
+      text-align: center;
+      line-height: 1.5;
+      font-family: "Cutive Mono";
+      font-size: 17px;
+    `,
+    children: [
+      emailIcon,
+      " madelineweste at gmail.com",
+      br(),
+      instagramIcon,
+      " @madelineweste",
+    ],
+  });
 }
 
-export async function showPaintingView(
-  container: HTMLElement,
-  cName: string,
-  pName: string
-): Promise<void> {
-  container.replaceChildren(
-    $("img", {
-      class: "full-size-painting",
-      src: `images/paintings-${cName}/${pName}.jpg`,
-    })
-  );
-}
+export function homeView(): VirtualElement {
+  const homeView = div({
+    class: css`
+      width: min(100%, 640px);
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 16px;
+      column-gap: 16px;
+    `,
+    children: [],
+  });
 
-function $(
-  elementType: string,
-  attributes?: { readonly [_: string]: string },
-  children?: readonly (Element | string)[]
-): HTMLElement {
-  const element = document.createElement(elementType);
-  for (const key in attributes || {}) {
-    element.setAttribute(key, attributes[key]);
-  }
-  for (const child of children || []) {
-    element.appendChild(
-      typeof child === "string" ? document.createTextNode(child) : child
+  for (const c of collections) {
+    homeView.children.push(
+      homeViewCard({
+        text: c.cName,
+        href: `/#/collections/${c.cName}`,
+        cName: c.cName,
+        pName: c.pNames[0],
+      })
     );
   }
-  return element;
+
+  homeView.children.push(
+    homeViewCard({
+      text: "About",
+      href: "/#/about",
+      cName: aboutImage.cName,
+      pName: aboutImage.pName,
+    })
+  );
+
+  homeView.children.push(
+    homeViewCard({
+      text: "Contact",
+      href: "/#/contact",
+      cName: contactImage.cName,
+      pName: contactImage.pName,
+    })
+  );
+
+  return homeView;
+}
+
+function homeViewCard(opts: {
+  text: string;
+  href: string;
+  cName: string;
+  pName: string;
+}) {
+  const { width } =
+    imageSizes[`images-small/paintings-${opts.cName}/${opts.pName}.jpg`];
+  return a({
+    href: opts.href,
+    class: css`
+      position: relative;
+      min-width: 160px;
+      min-height: 160px;
+
+      box-shadow: 0px 3px 10px 0px #555;
+      transition: box-shadow 0.333s ease-out;
+
+      &:hover {
+        box-shadow: 0px 3px 10px 0px #777;
+      }
+    `,
+    style: {
+      maxWidth: `${width}px`,
+      flexGrow: `${width - 160}`,
+    },
+    children: [
+      img({
+        class: css`
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+
+          filter: brightness(100%) contrast(67%);
+          transition: filter 0.333s ease-out;
+
+          *:hover > & {
+            filter: brightness(110%) contrast(100%);
+          }
+        `,
+        src: `images-small/paintings-${opts.cName}/${opts.pName}.jpg`,
+      }),
+      div({
+        class: css`
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          text-align: center;
+          font-family: "Kalam";
+          font-size: 36px;
+          color: black;
+          text-decoration: none;
+        `,
+        children: [opts.text],
+      }),
+    ],
+  });
+}
+
+export function collectionView(cName: string): VirtualElement {
+  const cardHolder = div({
+    class: css`
+      width: min(100%, 640px);
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 16px;
+      column-gap: 16px;
+    `,
+    children: [],
+  });
+
+  const collection = collections.find((c) => c.cName === cName);
+  collection.pNames.forEach((pName) => {
+    cardHolder.children.push(
+      collectionViewCard({
+        href: `/#/paintings/${cName}/${pName}`,
+        cName: cName,
+        pName: pName,
+      })
+    );
+  });
+
+  const collectionView = div({
+    children: [
+      cardHolder,
+      a({
+        href: "/#/",
+        class: css`
+          display: block;
+          margin-top: 10px;
+          text-align: center;
+          font-family: "Cutive Mono";
+          font-size: 17px;
+
+          text-decoration: none;
+          color: #aaa;
+          transition: color 0.333s ease-out;
+
+          &:hover {
+            color: #ddd;
+          }
+        `,
+        children: ["↫ Home"],
+      }),
+    ],
+  });
+
+  return collectionView;
+}
+
+function collectionViewCard(opts: {
+  href: string;
+  cName: string;
+  pName: string;
+}) {
+  const { width } =
+    imageSizes[`images-small/paintings-${opts.cName}/${opts.pName}.jpg`];
+  return a({
+    href: opts.href,
+    class: css`
+      position: relative;
+      min-width: 160px;
+      min-height: 160px;
+
+      box-shadow: 0px 3px 10px 0px #555;
+      transition: box-shadow 0.333s ease-out;
+
+      &:hover {
+        box-shadow: 0px 3px 10px 0px #777;
+      }
+    `,
+    style: {
+      maxWidth: `${width}px`,
+      flexGrow: `${width - 160}`,
+    },
+    children: [
+      img({
+        class: css`
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+
+          filter: brightness(100%) contrast(100%);
+          transition: filter 0.333s ease-out;
+
+          *:hover > & {
+            filter: brightness(120%) contrast(100%);
+          }
+        `,
+        src: `images-small/paintings-${opts.cName}/${opts.pName}.jpg`,
+      }),
+    ],
+  });
+}
+
+export function paintingView(cName: string, pName: string): VirtualElement {
+  return div({
+    children: [
+      img({
+        class: css`
+          display: block;
+          max-width: 100%;
+          max-height: calc(100vh - 110px);
+          margin: auto;
+        `,
+        src: `images/paintings-${cName}/${pName}.jpg`,
+      }),
+      a({
+        href: `/#/collections/${cName}`,
+        class: css`
+          display: block;
+          margin-top: 10px;
+          text-align: center;
+          font-family: "Cutive Mono";
+          font-size: 17px;
+
+          text-decoration: none;
+          color: #aaa;
+          transition: color 0.333s ease-out;
+
+          &:hover {
+            color: #ddd;
+          }
+        `,
+        children: [`↫ ${cName}`],
+      }),
+    ],
+  });
 }
