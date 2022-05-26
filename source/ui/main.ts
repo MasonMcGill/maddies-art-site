@@ -1,6 +1,14 @@
 import { css } from "@emotion/css";
 
-import { VirtualElement, a, header, main, reify, render } from "./elements";
+import {
+  VirtualElement,
+  a,
+  header,
+  main,
+  reify,
+  render,
+  span,
+} from "./elements";
 import * as views from "./views";
 
 let activeTransition: Promise<void> | null = null;
@@ -26,16 +34,15 @@ function makeHeader() {
       z-index: 2;
       position: fixed;
       width: 100%;
-      padding-top: 6px;
+      padding-top: 3px;
       padding-bottom: 1px;
 
       background-color: black;
       box-shadow: 0px 0px 10px 0px black;
 
       text-align: center;
-      font-family: "Water Brush";
-      font-size: 28px;
-      color: white;
+      // font-family: "Water Brush";
+      // color: white;
     `,
     children: [makeHomeLink()],
   });
@@ -46,9 +53,20 @@ function makeHomeLink() {
     href: "/#/",
     class: css`
       color: white;
+      // color: #bbb;
       text-decoration: none;
+      font-family: "MuseoModerno";
+      font-size: 26px;
     `,
-    children: ["—\u00A0 Madeline Weste \u00A0—"],
+    children: [
+      span({ style: { color: "#666" }, children: ["·"] }),
+      span({ style: { color: "#999" }, children: ["\u00A0·"] }),
+      span({ style: { color: "#ccc" }, children: ["\u00A0·"] }),
+      "\u00A0 Madeline Weste \u00A0",
+      span({ style: { color: "#ccc" }, children: ["·\u00A0"] }),
+      span({ style: { color: "#999" }, children: ["·\u00A0"] }),
+      span({ style: { color: "#666" }, children: ["·"] }),
+    ],
   });
 }
 

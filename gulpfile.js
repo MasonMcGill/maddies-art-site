@@ -40,7 +40,7 @@ async function makeThumbnails() {
 }
 
 async function makeFullSizeImages() {
-  glob.sync("source/images/**/*.jpg").forEach(async (src) => {
+  glob.sync("source/images/paintings-*/*.jpg").forEach(async (src) => {
     await fs.outputFile(
       src.replace(/^source\/images/, "site/images"),
       await sharp(src).resize(1200, 1200, { fit: "outside" }).jpeg().toBuffer()
@@ -69,6 +69,7 @@ async function copyAsset(name) {
 
 export async function build() {
   await fs.copy("source/index.html", "site/index.html");
+  await copyAsset("images");
   await makeThumbnails();
   await makeFullSizeImages();
   await makeImageSizeFile();
@@ -80,6 +81,7 @@ export async function watch() {
   await build();
   gulp.watch("source/index.html", () => copyAsset("index.html"));
   gulp.watch("source/images/**", async () => {
+    await copyAsset("images");
     await makeThumbnails();
     await makeFullSizeImages();
     await makeImageSizeFile();

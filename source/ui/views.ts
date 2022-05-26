@@ -21,6 +21,25 @@ export function aboutView(): VirtualElement {
     children: [
       `Madeline Weste is a painter living in Los Angeles.
       She is very good with computers. 🖌️\\🤖_🎨`,
+      a({
+        href: `/#/`,
+        class: css`
+          display: block;
+          margin-top: 10px;
+          text-align: center;
+          font-family: "Cutive Mono";
+          font-size: 17px;
+
+          text-decoration: none;
+          color: #aaa;
+          transition: color 0.333s ease-out;
+
+          &:hover {
+            color: #ddd;
+          }
+        `,
+        children: ["↫ Home"],
+      }),
     ],
   });
 }
@@ -54,6 +73,25 @@ export function contactView(): VirtualElement {
       br(),
       instagramIcon,
       " @madelineweste",
+      a({
+        href: `/#/`,
+        class: css`
+          display: block;
+          margin-top: 10px;
+          text-align: center;
+          font-family: "Cutive Mono";
+          font-size: 17px;
+
+          text-decoration: none;
+          color: #aaa;
+          transition: color 0.333s ease-out;
+
+          &:hover {
+            color: #ddd;
+          }
+        `,
+        children: ["↫ Home"],
+      }),
     ],
   });
 }
@@ -137,11 +175,12 @@ function homeViewCard(opts: {
           height: 100%;
           object-fit: cover;
 
-          filter: brightness(100%) contrast(67%);
-          transition: filter 0.333s ease-out;
+          filter: brightness(100%) contrast(67%) hue-rotate(0deg);
+          transition: filter 0.5s ease-out;
 
           *:hover > & {
-            filter: brightness(110%) contrast(100%);
+            filter: brightness(110%) contrast(100%) hue-rotate(360deg);
+            transition: filter 1s ease-out;
           }
         `,
         src: `images-small/paintings-${opts.cName}/${opts.pName}.jpg`,
@@ -157,9 +196,16 @@ function homeViewCard(opts: {
           justify-content: center;
 
           text-align: center;
-          font-family: "Kalam";
-          font-size: 36px;
+          //
+          font-family: "MuseoModerno";
+          // font-family: "Flamenco";
+
+          // font-weight: bold;
+          // font-family: "Kalam";
+          // font-weight: bold;
+          font-size: 32px;
           color: black;
+
           text-decoration: none;
         `,
         children: [opts.text],
@@ -253,11 +299,12 @@ function collectionViewCard(opts: {
           height: 100%;
           object-fit: cover;
 
-          filter: brightness(100%) contrast(100%);
-          transition: filter 0.333s ease-out;
+          filter: brightness(100%) contrast(100%) hue-rotate(0deg);
+          transition: filter 0.5s ease-out;
 
           *:hover > & {
-            filter: brightness(120%) contrast(100%);
+            filter: brightness(120%) contrast(100%) hue-rotate(360deg);
+            transition: filter 1s ease-out;
           }
         `,
         src: `images-small/paintings-${opts.cName}/${opts.pName}.jpg`,
