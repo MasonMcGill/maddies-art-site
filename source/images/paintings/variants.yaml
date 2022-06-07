@@ -1,0 +1,2 @@
+small: { minWidth: 240, minHeight: 240 }
+large: { minWidth: 1200, minHeight: 1200 }
