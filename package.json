@@ -7,8 +7,8 @@
         "@fontsource/museomoderno": "^4.5.9",
         "@rollup/plugin-node-resolve": "^13.3.0",
         "@rollup/plugin-sucrase": "^4.0.3",
+        "cheerio": "^1.0.0-rc.11",
         "del": "^6.0.0",
-        "front-matter": "^4.0.2",
         "fs-extra": "^10.1.0",
         "glob": "^8.0.2",
         "gulp": "^4.0.2",
@@ -23,8 +23,8 @@
         "@types/fs-extra": "^9.0.13",
         "@types/gulp": "^4.0.9",
         "@types/js-yaml": "^4.0.5",
-        "@types/sharp": "^0.30.2",
-        "eslint-plugin-mdx": "^1.17.0"
+        "@types/marked": "^4.0.3",
+        "@types/sharp": "^0.30.2"
     },
     "scripts": {
         "build": "gulp build",

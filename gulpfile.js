@@ -7,10 +7,10 @@ import { rollup } from "rollup";
 import resolve from "@rollup/plugin-node-resolve";
 import sharp from "sharp";
 import sucrase from "@rollup/plugin-sucrase";
-import frontMatter from "front-matter";
-import { dirname, extname } from "path";
+import { extname } from "path";
 import { marked } from "marked";
 import yaml from "js-yaml";
+import * as cheerio from "cheerio";
 
 export async function build() {
   await del("site/**");
@@ -28,21 +28,11 @@ export async function watch() {
   gulp.watch("source/index.html", buildIndexPage);
   gulp.watch("source/images/**", buildImageDirectory);
   gulp.watch("node_modules/@fontsource/**", buildFontDirectory);
-  gulp.watch("source/pages/**", buildPageModule);
+  gulp.watch("source/pages.md", buildPageModule);
   gulp.watch("source/ui/**", buildUiModule);
 }
 
 async function buildIndexPage() {
-  // const sourceText = await fs.readFile("source/index.hbs", "utf-8");
-  // const { attributes, body } = frontMatter(sourceText);
-  // const fontNames = attributes?.fonts || [];
-  // const fontDir = "node_moduels/@fontsource";
-  // const fontDefs = await Promise.all(
-  //   fontNames.map((n) => fs.readFile(`${fontDir}/${n}/index.css`, "utf-8"))
-  // );
-  // const fontDefsConcat = fontDefs.join(" ").replace("\n", " ");
-  // const outputText = body.replace("{{fontDefinitions}}", fontDefsConcat);
-  // await fs.writeFile("site/index.html", outputText);
   await fs.copy("source/index.html", "site/index.html");
 }
 
@@ -109,37 +99,36 @@ async function buildFontDirectory() {
 }
 
 async function buildPageModule() {
-  const pageTree = await readPageTree("source/pages/index.md");
-  const pageTreeJson = `const pageTree = ${JSON.stringify(pageTree, null, 2)};`;
-  await fs.writeFile("site/pages.js", pageTreeJson);
-}
+  const fusedHtml = marked.parse(await fs.readFile("source/pages.md", "utf-8"));
+  const $ = cheerio.load(fusedHtml);
 
-async function readPageTree(path) {
-  const text = await fs.readFile(path, "utf-8");
-  const { body, attributes } = frontMatter(text);
-  const expandedAttributes = await resolveReferences(attributes, dirname(path));
-  return { ...expandedAttributes, body: marked.parse(body) };
-}
+  const pages = [];
 
-async function resolveReferences(value, cwd) {
-  if (Array.isArray(value)) {
-    return await Promise.all(value.map((e) => resolveReferences(e, cwd)));
-  }
-
-  if (typeof value === "object") {
-    const result = {};
-    for (const [k, v] of Object.entries(value)) {
-      result[k] = await resolveReferences(v, cwd);
+  for (const element of $("body").children()) {
+    if (element.tagName === "h1") {
+      let [path, type] = $(element).text().split(/\s+/);
+      type = type ? type.replace(/^\(|\)$/g, "") : null;
+      pages.push({ path, type, body: "" });
+      continue;
     }
-    return result;
+
+    if (
+      pages.length > 0 &&
+      pages.at(-1).body === "" &&
+      element.tagName === "pre" &&
+      element.firstChild.tagName === "code"
+    ) {
+      Object.assign(pages.at(-1), yaml.load($(element.firstChild).text()));
+      continue;
+    }
+
+    if (pages.length > 0) {
+      pages.at(-1).body += $.html(element) + "\n";
+    }
   }
 
-  if (typeof value === "string") {
-    const match = value.match(/^\$page\((.*)\)$/);
-    return match === null ? value : await readPageTree(`${cwd}/${match[1]}`);
-  }
-
-  return value;
+  const moduleText = `const pages = ${JSON.stringify(pages, null, 2)};`;
+  await fs.writeFile("site/pages.js", moduleText);
 }
 
 async function buildUiModule() {

@@ -3,21 +3,37 @@ export type ElementOptions = {
   id?: string;
   href?: string;
   src?: string;
-  style?: { [_: string]: string };
-  children?: (VirtualElement | string)[];
+  style?: Partial<CSSStyleDeclaration>;
+  children?: (HTMLElement | string)[];
 };
 
-export type VirtualElement = { typeName: string } & ElementOptions;
+function elementBuilder(typeName: string) {
+  return (options?: ElementOptions) => {
+    const element = document.createElement(typeName);
 
-function virtualElementBuilder(typeName: string) {
-  return (options?: ElementOptions) => ({ typeName, ...(options || {}) });
+    Object.entries(options || {}).forEach(([k, v]) => {
+      if (typeof v === "string") {
+        element.setAttribute(k, v);
+      }
+    });
+
+    Object.entries(options.style || {}).forEach(([k, v]) => {
+      element.style[k] = v;
+    });
+
+    (options.children || []).forEach((c) => {
+      element.append(c);
+    });
+
+    return element;
+  };
 }
 
-export const a = virtualElementBuilder("a");
-export const body = virtualElementBuilder("body");
-export const br = virtualElementBuilder("br");
-export const div = virtualElementBuilder("div");
-export const header = virtualElementBuilder("header");
-export const img = virtualElementBuilder("img");
-export const main = virtualElementBuilder("main");
-export const span = virtualElementBuilder("span");
+export const a = elementBuilder("a");
+export const body = elementBuilder("body");
+export const br = elementBuilder("br");
+export const div = elementBuilder("div");
+export const header = elementBuilder("header");
+export const img = elementBuilder("img");
+export const main = elementBuilder("main");
+export const span = elementBuilder("span");
