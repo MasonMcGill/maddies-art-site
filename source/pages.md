@@ -53,7 +53,7 @@ entries: autogenerate
 ![](images/paintings/2020/greed.jpg)
 
 # /2020/head-on-fire (painting)
-![](images/paintings/2020/haed-on-fire.jpg)
+![](images/paintings/2020/head-on-fire.jpg)
 
 # /2020/headspaces (painting)
 ![](images/paintings/2020/headspaces.jpg)
