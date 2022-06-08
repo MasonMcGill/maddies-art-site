@@ -41,8 +41,9 @@ async function showCollectionPage(container: HTMLElement, path: string) {
     .filter((p) => new RegExp(`^${path}[^\\/]+\\/?$`).test(p))
     .map(makeCard);
 
-  await fadeIn(container, [
+  container.append(
     div({
+      id: "card-container",
       class: css({
         width: "min(100%, 640px)",
         margin: "auto",
@@ -51,10 +52,18 @@ async function showCollectionPage(container: HTMLElement, path: string) {
         rowGap: "16px",
         columnGap: "16px",
       }),
-      children: cards,
-    }),
-    path !== "/" ? makeBackButton(path) : null,
-  ]);
+    })
+  );
+
+  await Promise.all(
+    cards.map((card) =>
+      fadeIn(container.querySelector("#card-container"), [card])
+    )
+  );
+
+  if (path !== "/") {
+    fadeIn(container, [makeBackButton(path)]);
+  }
 }
 
 function makeCard(path: string) {
@@ -172,7 +181,9 @@ async function showPaintingPage(container: HTMLElement, path: string) {
   const src = new DOMParser()
     .parseFromString(page.body, "text/html")
     .querySelector("img")
-    .src.replace(/.jpg$/, "-large.jpg");
+    .getAttribute("src")
+    .replace(/.jpg$/, "-large.jpg");
+  const imageSize = imageSizes[src.replace(/^images\//, "")];
 
   await fadeIn(container, [
     div({
@@ -184,6 +195,9 @@ async function showPaintingPage(container: HTMLElement, path: string) {
             maxHeight: "calc(100vh - 110px)",
             margin: "auto",
           }),
+          style: {
+            aspectRatio: `${imageSize?.width || 0} / ${imageSize?.height || 0}`,
+          },
           src,
         }),
       ],
@@ -224,10 +238,13 @@ async function fadeIn(container: HTMLElement, children: HTMLElement[]) {
   await Promise.all(
     children
       .filter((child) => child !== null)
-      .map((child) => {
+      .map(async (child) => {
         child.style.opacity = "0";
         container.append(child);
-        return transition(child, { opacity: "1" });
+        await Promise.all(
+          Array.from(child.querySelectorAll("img")).map((img) => img.decode())
+        );
+        await transition(child, { opacity: "1" });
       })
   );
 }
