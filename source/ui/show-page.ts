@@ -56,14 +56,10 @@ async function showCollectionPage(container: HTMLElement, path: string) {
   );
 
   await Promise.all(
-    cards.map((card) =>
-      fadeIn(container.querySelector("#card-container"), [card])
-    )
+    cards
+      .map((card) => fadeIn(container.querySelector("#card-container"), [card]))
+      .concat(path !== "/" ? [fadeIn(container, [makeBackButton(path)])] : [])
   );
-
-  if (path !== "/") {
-    fadeIn(container, [makeBackButton(path)]);
-  }
 }
 
 function makeCard(path: string) {
@@ -184,6 +180,7 @@ async function showPaintingPage(container: HTMLElement, path: string) {
     .getAttribute("src")
     .replace(/.jpg$/, "-large.jpg");
   const imageSize = imageSizes[src.replace(/^images\//, "")];
+  const aspectRatio = (imageSize?.width || 1) / (imageSize?.height || 1);
 
   await fadeIn(container, [
     div({
@@ -191,12 +188,11 @@ async function showPaintingPage(container: HTMLElement, path: string) {
         img({
           class: css({
             display: "block",
-            maxWidth: "100%",
-            maxHeight: "calc(100vh - 110px)",
             margin: "auto",
           }),
           style: {
-            aspectRatio: `${imageSize?.width || 0} / ${imageSize?.height || 0}`,
+            width: `min(100vw - 40px, (100vh - 110px) * ${aspectRatio})`,
+            height: `min(100vh - 110px, (100vw - 40px) / ${aspectRatio})`,
           },
           src,
         }),
