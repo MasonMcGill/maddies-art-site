@@ -9,7 +9,8 @@ window.onload = async () => {
     history.replaceState(null, null, "/#/");
   }
 
-  await document.fonts.ready;
+  await document.fonts.load("12px MuseoModerno");
+  await document.fonts.load("12px Cutive Mono");
   document.body.append(makeHeader(), makeMainSection());
   showRequestedView();
 
