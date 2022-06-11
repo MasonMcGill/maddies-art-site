@@ -205,20 +205,26 @@ async function showPaintingPage(container: HTMLElement, path: string) {
 function makeBackButton(path: string) {
   const parentPath = path.match(/(.*\/)[^\/]+\/?/)[1];
   const parentName = pages.find((p) => p.path === parentPath).name;
-  return a({
-    href: `/#${parentPath}`,
+  return div({
     class: css({
-      display: "block",
       marginTop: "10px",
       textAlign: "center",
-      fontFamily: "Cutive Mono",
-      fontSize: "17px",
-      textDecoration: "none",
-      color: "#aaa",
-      transition: "color 0.333s ease-out",
-      ":hover": { color: "#ddd" },
     }),
-    children: [`↫ ${parentName}`],
+    children: [
+      a({
+        href: `/#${parentPath}`,
+        class: css({
+          textAlign: "center",
+          fontFamily: "Cutive Mono",
+          fontSize: "17px",
+          textDecoration: "none",
+          color: "#aaa",
+          transition: "color 0.333s ease-out",
+          ":hover": { color: "#ddd" },
+        }),
+        children: [`↫ ${parentName}`],
+      }),
+    ],
   });
 }
 
