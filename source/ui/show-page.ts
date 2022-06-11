@@ -154,12 +154,12 @@ async function showProseBlockPage(container: HTMLElement, path: string) {
   await fadeOut(container);
 
   const page = pages.find((p) => p.path === path);
-  const doc = new DOMParser().parseFromString(page.body, "text/html");
+  const doc = new DOMParser().parseFromString(page.body, "text/html").body;
 
   await fadeIn(container, [
     div({
       class: css({
-        width: "min(100% - 15px, 600px)",
+        width: "min(100%, 640px)",
         margin: "auto",
         fontFamily: "Cutive Mono",
         fontSize: "17px",
