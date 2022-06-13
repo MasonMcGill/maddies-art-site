@@ -218,7 +218,6 @@ function makeBackButton(path: string) {
       width: "min(100%, 640px)",
       margin: "auto",
       display: "flex",
-      justifyContent: "space-between",
       marginTop: "10px",
       textAlign: "center",
     }),
@@ -227,7 +226,9 @@ function makeBackButton(path: string) {
         ? a({
             href: `/#${prevPage.path}`,
             class: css({
+              display: "block",
               flexBasis: "100px",
+              flexGrow: "1",
               textAlign: "left",
               fontFamily: "Cutive Mono",
               fontSize: "17px",
@@ -238,11 +239,13 @@ function makeBackButton(path: string) {
             }),
             children: [`↫ ${prevPage.name || "Previous"}`],
           })
-        : div({ class: css({ flexBasis: "100px" }) }),
+        : div({ class: css({ flexBasis: "100px", flexGrow: "1" }) }),
       a({
         href: `/#${parentPage.path}`,
         class: css({
+          display: "block",
           flexBasis: "100px",
+          flexGrow: "1",
           textAlign: "center",
           fontFamily: "Cutive Mono",
           fontSize: "17px",
@@ -251,13 +254,23 @@ function makeBackButton(path: string) {
           transition: "color 0.333s ease-out",
           ":hover": { color: "#ddd" },
         }),
-        children: [`⤜ ${parentPage.name}   ⤛`],
+        children: [
+          span({ style: { color: "#666" }, children: ["·"] }),
+          span({ style: { color: "#999" }, children: ["·"] }),
+          span({ style: { color: "#ccc" }, children: ["·"] }),
+          `  ${parentPage.name} `,
+          span({ style: { color: "#ccc" }, children: ["·"] }),
+          span({ style: { color: "#999" }, children: ["·"] }),
+          span({ style: { color: "#666" }, children: ["·"] }),
+        ],
       }),
       nextPage !== null
         ? a({
             href: `/#${nextPage.path}`,
             class: css({
+              display: "block",
               flexBasis: "100px",
+              flexGrow: "1",
               textAlign: "right",
               fontFamily: "Cutive Mono",
               fontSize: "17px",
@@ -268,7 +281,7 @@ function makeBackButton(path: string) {
             }),
             children: [`${nextPage.name || "Next"} ↬`],
           })
-        : div({ class: css({ flexBasis: "100px" }) }),
+        : div({ class: css({ flexBasis: "100px", flexGrow: "1" }) }),
     ],
   });
 }
