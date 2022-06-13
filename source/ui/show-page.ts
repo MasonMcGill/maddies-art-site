@@ -227,7 +227,8 @@ function makeBackButton(path: string) {
         ? a({
             href: `/#${prevPage.path}`,
             class: css({
-              textAlign: "center",
+              flexBasis: "100px",
+              textAlign: "left",
               fontFamily: "Cutive Mono",
               fontSize: "17px",
               textDecoration: "none",
@@ -237,10 +238,11 @@ function makeBackButton(path: string) {
             }),
             children: [`↫ ${prevPage.name || "Previous"}`],
           })
-        : div(),
+        : div({ class: css({ flexBasis: "100px" }) }),
       a({
         href: `/#${parentPage.path}`,
         class: css({
+          flexBasis: "100px",
           textAlign: "center",
           fontFamily: "Cutive Mono",
           fontSize: "17px",
@@ -255,7 +257,8 @@ function makeBackButton(path: string) {
         ? a({
             href: `/#${nextPage.path}`,
             class: css({
-              textAlign: "center",
+              flexBasis: "100px",
+              textAlign: "right",
               fontFamily: "Cutive Mono",
               fontSize: "17px",
               textDecoration: "none",
@@ -265,7 +268,7 @@ function makeBackButton(path: string) {
             }),
             children: [`${nextPage.name || "Next"} ↬`],
           })
-        : div(),
+        : div({ class: css({ flexBasis: "100px" }) }),
     ],
   });
 }
