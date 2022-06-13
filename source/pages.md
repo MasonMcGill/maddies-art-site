@@ -229,8 +229,32 @@ name: About
 cardImage: images/paintings/2017/lichtenstein.jpg
 ```
 
-Madeline Weste is a painter living in Los Angeles. She is very good with
-computers. 🖌️\\🤖_🎨
+Born in Sacramento CA in 1986, Madeline Weste is the product of an environmental
+chemist and a Mormon religious fanatic turned astrologer. She was raised in a
+Waldorf school where she didn't learn to read until she was eight years old. In
+Madeline's teens, her mother took over a metaphysical bookstore in town,
+exposing the young, impressionable Madeline to psychics, astrologers, energy
+healers, tarot readers, palm readers, aura imaging technicians, people who
+claimed to make contact with aliens, astrocartographers, and aspiring
+breatharians. She also failed briefly as a teen fashion model for an agency in
+San Fransisco.
+
+Madeline studied traditional oil painting at the University of Redlands, and in
+Cortona, Italy. After graduation, Madeline lived in Seattle, where she taught
+art, apprenticed with a master gilder, and illustrated a full color graphic
+novel in watercolor called The Adventures of Whaley and Birdface.
+
+Madeline moved to Brooklyn in 2012 without having visited the East Coast, but
+figured she was pretty adaptable so why not. She found work as lead artist's
+assistant to the sculptor Paul Villinski for nearly four years until she married
+a trust funder in 2015, and decided she could get away with just partying and
+painting in their baller Clinton Hill loft apartment. Upon discovering her
+husband's secret heroin addiction and the decimation of their finances, Madeline
+moved out and made a living in antique jewelry for a while, finally moving into
+making art full time after being stranded at a tiny California coast surf pad
+for the first year of the coronavirus pandemic. She has since moved to Los
+Angeles where she paints constantly and is very good at living on next to
+nothing.
 
 # /contact (proseBlock)
 ```

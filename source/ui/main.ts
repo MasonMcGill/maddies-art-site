@@ -1,4 +1,4 @@
-import { css } from "@emotion/css";
+import { css, injectGlobal } from "@emotion/css";
 import { a, header, main, span } from "./elements";
 import showPage from "./show-page";
 
@@ -8,6 +8,13 @@ window.onload = async () => {
   if (location.hash === "") {
     history.replaceState(null, null, "/#/");
   }
+
+  injectGlobal({
+    p: {
+      marginTop: "0px",
+      textAlign: "justify",
+    },
+  });
 
   await document.fonts.load("12px MuseoModerno");
   await document.fonts.load("12px Cutive Mono");
