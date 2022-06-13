@@ -8,10 +8,10 @@ export type ElementOptions = {
 };
 
 function elementBuilder(typeName: string) {
-  return (options?: ElementOptions) => {
+  return (options: ElementOptions = {}) => {
     const element = document.createElement(typeName);
 
-    Object.entries(options || {}).forEach(([k, v]) => {
+    Object.entries(options).forEach(([k, v]) => {
       if (typeof v === "string") {
         element.setAttribute(k, v);
       }

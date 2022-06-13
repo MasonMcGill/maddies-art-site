@@ -204,15 +204,42 @@ async function showPaintingPage(container: HTMLElement, path: string) {
 
 function makeBackButton(path: string) {
   const parentPath = path.match(/(.*\/)[^\/]+\/?/)[1];
-  const parentName = pages.find((p) => p.path === parentPath).name;
+  const parentPage = pages.find((p) => p.path === parentPath);
+
+  const siblingPages = pages.filter((p) =>
+    new RegExp(`^${parentPath}[^\\/]+\\/?$`).test(p.path)
+  );
+  const indexInSiblings = siblingPages.findIndex((p) => p.path == path);
+  const prevPage = siblingPages[indexInSiblings - 1] || null;
+  const nextPage = siblingPages[indexInSiblings + 1] || null;
+
   return div({
     class: css({
+      width: "min(100%, 640px)",
+      margin: "auto",
+      display: "flex",
+      justifyContent: "space-between",
       marginTop: "10px",
       textAlign: "center",
     }),
     children: [
+      prevPage !== null
+        ? a({
+            href: `/#${prevPage.path}`,
+            class: css({
+              textAlign: "center",
+              fontFamily: "Cutive Mono",
+              fontSize: "17px",
+              textDecoration: "none",
+              color: "#aaa",
+              transition: "color 0.333s ease-out",
+              ":hover": { color: "#ddd" },
+            }),
+            children: [`↫ ${prevPage.name || "Previous"}`],
+          })
+        : div(),
       a({
-        href: `/#${parentPath}`,
+        href: `/#${parentPage.path}`,
         class: css({
           textAlign: "center",
           fontFamily: "Cutive Mono",
@@ -222,8 +249,23 @@ function makeBackButton(path: string) {
           transition: "color 0.333s ease-out",
           ":hover": { color: "#ddd" },
         }),
-        children: [`↫ ${parentName}`],
+        children: [`⤜ ${parentPage.name}   ⤛`],
       }),
+      nextPage !== null
+        ? a({
+            href: `/#${nextPage.path}`,
+            class: css({
+              textAlign: "center",
+              fontFamily: "Cutive Mono",
+              fontSize: "17px",
+              textDecoration: "none",
+              color: "#aaa",
+              transition: "color 0.333s ease-out",
+              ":hover": { color: "#ddd" },
+            }),
+            children: [`${nextPage.name || "Next"} ↬`],
+          })
+        : div(),
     ],
   });
 }
