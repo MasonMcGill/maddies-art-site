@@ -258,7 +258,7 @@ function makeBackButton(path: string) {
           span({ style: { color: "#666" }, children: ["·"] }),
           span({ style: { color: "#999" }, children: ["·"] }),
           span({ style: { color: "#ccc" }, children: ["·"] }),
-          `  ${parentPage.name} `,
+          `\u2009\u200a${parentPage.name}\u2009`,
           span({ style: { color: "#ccc" }, children: ["·"] }),
           span({ style: { color: "#999" }, children: ["·"] }),
           span({ style: { color: "#666" }, children: ["·"] }),
