@@ -1,0 +1,4 @@
+{
+    "dockerFile": "dockerfile",
+    "forwardPorts": [8080]
+}

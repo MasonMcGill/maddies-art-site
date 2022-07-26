@@ -1,0 +1,10 @@
+FROM ubuntu:focal
+
+RUN apt-get update
+RUN apt-get install --yes curl git
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install --yes nodejs
+
+RUN useradd --create-home --shell /bin/bash user
+USER user
+WORKDIR /home/user
