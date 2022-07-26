@@ -12,9 +12,11 @@ entries: autogenerate
 
 # /2022/bts (painting)
 ![](images/paintings/2022/bts.jpg)
+24"  × 32", sold
 
 # /2022/lab-forest (painting)
 ![](images/paintings/2022/lab-forest.jpg)
+12"  × 12", sold
 
 # /2021/ (collection)
 ```
@@ -24,15 +26,19 @@ entries: autogenerate
 
 # /2021/coney-island (painting)
 ![](images/paintings/2021/coney-island.jpg)
+86"  × 48"
 
 # /2021/fishing (painting)
 ![](images/paintings/2021/fishing.jpg)
+9"  × 12"
 
 # /2021/heart-disruption (painting)
 ![](images/paintings/2021/heart-disruption.jpg)
+10"  × 10"
 
 # /2021/hive-mind (painting)
 ![](images/paintings/2021/hive-mind.jpg)
+10"  × 10"
 
 # /2020/ (collection)
 ```
@@ -42,36 +48,47 @@ entries: autogenerate
 
 # /2020/in-your-head (painting)
 ![](images/paintings/2020/in-your-head.jpg)
+15"  × 11"
 
 # /2020/apple (painting)
 ![](images/paintings/2020/apple.jpg)
+12"  × 9"
 
 # /2020/black-lives-matter (painting)
 ![](images/paintings/2020/black-lives-matter.jpg)
+11"  × 16"
 
 # /2020/greed (painting)
 ![](images/paintings/2020/greed.jpg)
+12"  × 9"
 
 # /2020/head-on-fire (painting)
 ![](images/paintings/2020/head-on-fire.jpg)
+11"  × 16"
 
 # /2020/headspaces (painting)
 ![](images/paintings/2020/headspaces.jpg)
+16"  × 11"
 
 # /2020/nicholas (painting)
 ![](images/paintings/2020/nicholas.jpg)
+10"  × 10"
 
 # /2020/quarantine (painting)
 ![](images/paintings/2020/quarantine.jpg)
+16"  × 11"
 
 # /2020/sharks (painting)
 ![](images/paintings/2020/sharks.jpg)
+9"  × 12", sold
 
 # /2020/standing-out (painting)
 ![](images/paintings/2020/standing-out.jpg)
+16"  × 11"
 
 # /2020/tears (painting)
 ![](images/paintings/2020/tears.jpg)
+12"  × 9"
 
 # /2019/ (collection)
 ```
@@ -81,15 +98,19 @@ entries: autogenerate
 
 # /2019/wet-tiger (painting)
 ![](images/paintings/2019/wet-tiger.jpg)
+24"  × 36", sold
 
 # /2019/anyone-will-do (painting)
 ![](images/paintings/2019/anyone-will-do.jpg)
+54"  × 36"
 
 # /2019/day-night-poppies (painting)
 ![](images/paintings/2019/day-night-poppies.jpg)
+12"  × 12", sold
 
 # /2019/forever-fun (painting)
 ![](images/paintings/2019/forever-fun.jpg)
+12"  × 12", sold
 
 # /2018/ (collection)
 ```
@@ -99,24 +120,31 @@ entries: autogenerate
 
 # /2018/trickle-down (painting)
 ![](images/paintings/2018/trickle-down.jpg)
+18"  × 36", sold
 
 # /2018/boiling-pot (painting)
 ![](images/paintings/2018/boiling-pot.jpg)
+20"  × 24"
 
 # /2018/circular-thinking (painting)
 ![](images/paintings/2018/circular-thinking.jpg)
+24"  × 24"
 
 # /2018/eclipse (painting)
 ![](images/paintings/2018/eclipse.jpg)
+27"  × 22", sold TO MY MOM!!! 🤗💕
 
 # /2018/fishfucker (painting)
 ![](images/paintings/2018/fishfucker.jpg)
+33"  × 25", sold
 
 # /2018/graveyard (painting)
 ![](images/paintings/2018/graveyard.jpg)
+30"  × 34"
 
 # /2018/screaming-cats (painting)
 ![](images/paintings/2018/screaming-cats.jpg)
+30"  × 30"
 
 # /2017/ (collection)
 ```
@@ -126,15 +154,19 @@ entries: autogenerate
 
 # /2017/city-man (painting)
 ![](images/paintings/2017/city-man.jpg)
+12"  × 12", sold
 
 # /2017/lichtenstein (painting)
 ![](images/paintings/2017/lichtenstein.jpg)
+12"  × 12", sold
 
 # /2017/rich-man (painting)
 ![](images/paintings/2017/rich-man.jpg)
+12"  × 12"
 
 # /2017/scary-cats (painting)
 ![](images/paintings/2017/scary-cats.jpg)
+23"  × 26"
 
 # /2016/ (collection)
 ```
@@ -144,9 +176,11 @@ entries: autogenerate
 
 # /2016/political (painting)
 ![](images/paintings/2016/political.jpg)
+30"  × 40"
 
 # /2016/alcoholic (painting)
 ![](images/paintings/2016/alcoholic.jpg)
+24"  × 36"
 
 # /2015/ (collection)
 ```
@@ -156,9 +190,11 @@ entries: autogenerate
 
 # /2015/big-lady (painting)
 ![](images/paintings/2015/big-lady.jpg)
+36"  × 48", on hold
 
 # /2015/in-the-park (painting)
 ![](images/paintings/2015/in-the-park.jpg)
+24"  × 28", sold
 
 # /2014/ (collection)
 ```
@@ -168,15 +204,19 @@ entries: autogenerate
 
 # /2014/lady-and-the-tiger (painting)
 ![](images/paintings/2014/lady-and-the-tiger.jpg)
+18"  × 24", sold
 
 # /2014/mirror-lady (painting)
 ![](images/paintings/2014/mirror-lady.jpg)
+36"  × 28"
 
 # /2014/pigs (painting)
 ![](images/paintings/2014/pigs.jpg)
+30"  × 20"
 
 # /2014/still-life (painting)
 ![](images/paintings/2014/still-life.jpg)
+18"  × 14"
 
 # /2013/ (collection)
 ```
@@ -186,18 +226,23 @@ entries: autogenerate
 
 # /2013/rabbits (painting)
 ![](images/paintings/2013/rabbits.jpg)
+24"  × 18", sold
 
 # /2013/moving-forward (painting)
 ![](images/paintings/2013/moving-forward.jpg)
+18"  × 18"
 
 # /2013/seattle-interior (painting)
 ![](images/paintings/2013/seattle-interior.jpg)
+12"  × 12", sold
 
 # /2013/sunflowers (painting)
 ![](images/paintings/2013/sunflowers.jpg)
+11"  × 15"
 
 # /2013/table (painting)
 ![](images/paintings/2013/table.jpg)
+18"  × 24", sold
 
 # /2012/ (collection)
 ```
@@ -207,21 +252,27 @@ entries: autogenerate
 
 # /2012/extinction-dream-1 (painting)
 ![](images/paintings/2012/extinction-dream-1.jpg)
+12"  × 12"
 
 # /2012/extinction-dream-2 (painting)
 ![](images/paintings/2012/extinction-dream-2.jpg)
+12"  × 12"
 
 # /2012/extinction-dream-3 (painting)
 ![](images/paintings/2012/extinction-dream-3.jpg)
+12"  × 12"
 
 # /2012/extinction-dream-4 (painting)
 ![](images/paintings/2012/extinction-dream-4.jpg)
+12"  × 12"
 
 # /2012/extinction-dream-5 (painting)
 ![](images/paintings/2012/extinction-dream-5.jpg)
+12"  × 12"
 
 # /2012/extinction-dream-6 (painting)
 ![](images/paintings/2012/extinction-dream-6.jpg)
+12"  × 12"
 
 # /about (proseBlock)
 ```

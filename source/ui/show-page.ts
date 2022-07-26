@@ -174,29 +174,30 @@ async function showPaintingPage(container: HTMLElement, path: string) {
   await fadeOut(container);
 
   const page = pages.find((p) => p.path === path);
-  const src = new DOMParser()
-    .parseFromString(page.body, "text/html")
-    .querySelector("img")
-    .getAttribute("src")
-    .replace(/.jpg$/, "-large.jpg");
-  const imageSize = imageSizes[src.replace(/^images\//, "")];
-  const aspectRatio = (imageSize?.width || 1) / (imageSize?.height || 1);
+  const doc = new DOMParser().parseFromString(page.body, "text/html").body;
+
+  doc.querySelectorAll("img").forEach(img => {
+    const src = (img.getAttribute("src") || "").replace(/.jpg$/, "-large.jpg");
+    const size = imageSizes[src.replace(/^images\//, "")];
+    img.style.width = "min(100%, 640px)";
+    img.style.aspectRatio = `${size.width / size.height}`;
+    img.src = src;
+  });
+  doc.querySelectorAll("p").forEach(p => {
+    // p.innerText
+    // p.innerText = p.innerText?.replace(/\" ×/g, "\" ×");
+    p.style.textAlign = "center";
+  });
 
   await fadeIn(container, [
     div({
-      children: [
-        img({
-          class: css({
-            display: "block",
-            margin: "auto",
-          }),
-          style: {
-            width: `min(100vw - 40px, (100vh - 110px) * ${aspectRatio})`,
-            height: `min(100vh - 110px, (100vw - 40px) / ${aspectRatio})`,
-          },
-          src,
-        }),
-      ],
+      class: css({
+        width: "min(100%, 640px)",
+        margin: "auto",
+        fontFamily: "Cutive Mono",
+        fontSize: "17px",
+      }),
+      children: Array.from(doc.children) as HTMLElement[],
     }),
     path !== "/" ? makeBackButton(path) : null,
   ]);
