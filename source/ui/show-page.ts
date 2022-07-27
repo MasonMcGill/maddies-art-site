@@ -184,8 +184,6 @@ async function showPaintingPage(container: HTMLElement, path: string) {
     img.src = src;
   });
   doc.querySelectorAll("p").forEach(p => {
-    // p.innerText
-    // p.innerText = p.innerText?.replace(/\" ×/g, "\" ×");
     p.style.textAlign = "center";
   });
 
@@ -238,7 +236,10 @@ function makeBackButton(path: string) {
               transition: "color 0.333s ease-out",
               ":hover": { color: "#ddd" },
             }),
-            children: [`↫ ${prevPage.name || "Previous"}`],
+            children: [
+              span({ class: css({ lineHeight: "0" }), children: ["↫ "] }),
+              prevPage.name || "Previous"
+            ],
           })
         : div({ class: css({ flexBasis: "100px", flexGrow: "1" }) }),
       a({
@@ -280,7 +281,10 @@ function makeBackButton(path: string) {
               transition: "color 0.333s ease-out",
               ":hover": { color: "#ddd" },
             }),
-            children: [`${nextPage.name || "Next"} ↬`],
+            children: [
+              nextPage.name || "Next",
+              span({ class: css({ lineHeight: "0" }), children: [" ↬"] })
+            ],
           })
         : div({ class: css({ flexBasis: "100px", flexGrow: "1" }) }),
     ],
