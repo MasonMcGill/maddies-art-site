@@ -12,7 +12,7 @@ window.onload = async () => {
   injectGlobal({
     p: {
       marginTop: "0px",
-      textAlign: "justify",
+      "@media (min-width: 500px)": { textAlign: "justify" }
     },
   });
 
