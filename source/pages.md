@@ -10,13 +10,37 @@ name: "2022"
 entries: autogenerate
 ```
 
+# /2022/fate (painting)
+![](images/paintings/2022/fate.jpg)
+5'  × 4'
+
+# /2022/bitcoin (painting)
+![](images/paintings/2022/bitcoin.jpg)
+24"  × 18"
+
 # /2022/bts (painting)
 ![](images/paintings/2022/bts.jpg)
 24"  × 32", sold
 
+# /2022/home-workout (painting)
+![](images/paintings/2022/home-workout.jpg)
+25"  × 15"
+
 # /2022/lab-forest (painting)
 ![](images/paintings/2022/lab-forest.jpg)
 12"  × 12", sold
+
+# /2022/squeeze (painting)
+![](images/paintings/2022/squeeze.jpg)
+24"  × 18"
+
+# /2022/success-fantasy (painting)
+![](images/paintings/2022/success-fantasy.jpg)
+33"  × 28"
+
+# /2022/summer-night (painting)
+![](images/paintings/2022/summer-night.jpg)
+4'  × 5'
 
 # /2021/ (collection)
 ```
