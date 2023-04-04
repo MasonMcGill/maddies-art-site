@@ -71,8 +71,8 @@ function makeCard(path: string) {
     href: `/#${page.path}`,
     class: css({
       position: "relative",
-      minWidth: "160px",
-      minHeight: "160px",
+      minWidth: "150px",
+      minHeight: "150px",
       boxShadow: "0px 3px 10px 0px #555",
       transition: "box-shadow 0.333s ease-out",
       ":hover": {
@@ -81,7 +81,7 @@ function makeCard(path: string) {
     }),
     style: {
       maxWidth: `${width}px`,
-      flexGrow: `${width - 160}`,
+      flexGrow: `${width - 150}`,
     },
     children: [
       img({
