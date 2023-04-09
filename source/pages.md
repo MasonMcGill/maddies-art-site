@@ -4,6 +4,32 @@ name: Home
 entries: autogenerate
 ```
 
+# /2023/ (collection)
+```
+name: "2023"
+entries: autogenerate
+```
+
+# /2023/sunset (painting)
+![](images/paintings/2023/sunset.jpg)
+13"  × 13"
+
+# /2023/good-luck (painting)
+![](images/paintings/2023/good-luck.jpg)
+19"  × 15"
+
+# /2023/different-game (painting)
+![](images/paintings/2023/different-game.jpg)
+21"  × 21"
+
+# /2023/communication (painting)
+![](images/paintings/2023/communication.jpg)
+23"  × 19"
+
+# /2023/sunrise (painting)
+![](images/paintings/2023/sunrise.jpg)
+13"  × 13"
+
 # /2022/ (collection)
 ```
 name: "2022"
@@ -18,9 +44,13 @@ entries: autogenerate
 ![](images/paintings/2022/summer-night.jpg)
 4'  × 5'
 
-# /2022/success-fantasy (painting)
-![](images/paintings/2022/success-fantasy.jpg)
-33"  × 28"
+# /2022/success-fantasy-1 (painting)
+![](images/paintings/2022/success-fantasy-1.jpg)
+34"  × 27"
+
+# /2022/success-fantasy-2 (painting)
+![](images/paintings/2022/success-fantasy-2.jpg)
+34"  × 27"
 
 # /2022/squeeze (painting)
 ![](images/paintings/2022/squeeze.jpg)
