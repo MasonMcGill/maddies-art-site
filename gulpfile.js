@@ -58,7 +58,7 @@ async function buildImageDirectory(subtree = "", variants = null) {
     await Promise.all(
       Object.entries(variants).map(async ([name, { minWidth, minHeight }]) => {
         const ext = extname(subtree);
-        const dst = `site/images${subtree.slice(0, -ext.length)}-${name}${ext}`;
+        const dst = `site/images${subtree.slice(0, -ext.length)}-${name}.jpg`;
         const outputBuffer = await image
           .resize(minWidth, minHeight, { fit: "outside" })
           .jpeg()
