@@ -91,7 +91,7 @@ function makeCard(path: string) {
           height: "100%",
           objectFit: "cover",
           filter: page.name
-            ? "brightness(100%) contrast(67%) hue-rotate(0deg)"
+            ? "brightness(100%) contrast(80%) hue-rotate(0deg)"
             : "brightness(100%) contrast(100%) hue-rotate(0deg)",
           transition: "filter 0.5s ease-out",
           "*:hover > &": {
